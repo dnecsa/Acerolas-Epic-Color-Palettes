@@ -163,7 +163,7 @@
         <input id="color-count" name="color-count" type="number" min="3" max="16" value="8" />
         <input type="submit" value="Generate" />
     </form>
-    <p id="click-instructions">click a color to see hex + rgb and automatically copy to clipboard</p>
+    <p id="click-instructions">click a color to see hex + rgb and automatically copy it to clipboard</p>
     <div id="result">
         <div id="palettes"></div>
         <div id="details">
@@ -230,8 +230,8 @@
                         });
                     });
                     paletteColorElement.style.backgroundColor = hex;
-                    paletteColorElement.style.width = "2em";
-                    paletteColorElement.style.height = "2em";
+                    paletteColorElement.style.width = "5em";
+                    paletteColorElement.style.height = "5em";
                     paletteColorsElement.appendChild(paletteColorElement);
                 }
             });
