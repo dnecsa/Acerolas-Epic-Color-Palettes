@@ -4,48 +4,152 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <title>acerola's epic color palettes</title>
 </head>
 
 <style>
-    body {
-        background-color: #332F35;
-        color: white;
-    }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #1a1a1a;
+            color: #ffffff;
+            line-height: 1.6;
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
 
-    #color-form {
-        margin-bottom: 1em;
-    }
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
 
-    #click-instructions {
-        display: none;
-    }
+        #color-form {
+            background-color: #2a2a2a;
+            padding: 2rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            align-items: center;
+        }
 
-    #result {
-        display: flex;
-    }
+        #color-form label {
+            font-weight: 600;
+        }
 
-    #palettes {
-        margin-right: 2em;
-    }
+        #color-form select,
+        #color-form input[type="number"],
+        #color-form input[type="submit"] {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 5px;
+            background-color: #3a3a3a;
+            color: #ffffff;
+            font-size: 1rem;
+        }
 
-    #details {
-        align-items: center;
-        display: flex;
-        flex-direction: column;
-        padding-top: 1.125em;
-    }
+        #color-form input[type="submit"] {
+            background-color: #4CAF50;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
 
-    #details-color {
-        width: 8.75em;
-        height: 8.75em;
-        margin-bottom: .5em;
-    }
+        #color-form input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        #click-instructions {
+            text-align: center;
+            margin-bottom: 1rem;
+            font-style: italic;
+        }
+
+        #result {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        #palettes {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .palette {
+            background-color: #2a2a2a;
+            padding: 1rem;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+        }
+
+        .palette-label {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .palette-colors {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .palette-color {
+            width: 10rem;
+            height: 10rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .palette-color:hover {
+            transform: scale(1.1);
+        }
+
+        #details {
+            flex: 0 0 300px;
+            background-color: #2a2a2a;
+            padding: 2rem;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #details-color {
+            width: 150px;
+            height: 150px;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+        }
+
+        #details span {
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        #copy-button {
+            margin-top: 1rem;
+            padding: 0.5rem 1rem;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        #copy-button:hover {
+            background-color: #45a049;
+        }
 </style>
 
 <body>
-    <h1>acerola's epic color palkettes</h1>
-    <p>Generate as many palettes as you want until you find one you like. Then take a picture of the palettes and tell Acerola which one you picked.</p>
+    <h1>acerola's epic color palettes</h1>
+    <p>Updated to automatically copy the hex code without having to click copy, also improved ui</p>
+    <p>Generate as many palettes as you want until you find one you like <br>1 = HSL <br>2 = HSV <br>3 = OKLAB.</p>
     <form id="color-form">
         <label for="color-mode">Hue mode:</label>
         <select id="color-mode" name="color-mode">
@@ -59,13 +163,14 @@
         <input id="color-count" name="color-count" type="number" min="3" max="16" value="8" />
         <input type="submit" value="Generate" />
     </form>
-    <p id="click-instructions">click a color to see hex + rgb</p>
+    <p id="click-instructions">click a color to see hex + rgb and automatically copy to clipboard</p>
     <div id="result">
         <div id="palettes"></div>
         <div id="details">
             <div id="details-color"></div>
             <span id="details-hex"></span>
             <span id="details-rgb"></span>
+            <button id="copy-button" onclick="copyToClipboard()">Copy Hex</button>
         </div>
     </div>
     <script src="./colors.js"></script>
@@ -115,8 +220,14 @@
                         const detailsHex = document.getElementById("details-hex");
                         const detailsRGB = document.getElementById("details-rgb");
                         detailsColor.style.backgroundColor = hex;
-                        detailsHex.innerText = `Hex: ${hex}`;
+                        detailsHex.innerText = `${hex}`;
                         detailsRGB.innerText = `RGB: (${color[0]}, ${color[1]}, ${color[2]})`;
+                        
+                        navigator.clipboard.writeText(hex).then(() => {
+                            console.log('Hex code copied to clipboard');
+                        }).catch(err => {
+                            console.error('Failed to copy: ', err);
+                        });
                     });
                     paletteColorElement.style.backgroundColor = hex;
                     paletteColorElement.style.width = "2em";
