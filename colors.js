@@ -259,7 +259,7 @@ function generatePalettes(HUE_MODE, COLOR_COUNT) {
 function copyToClipboard() {
   const hexValue = document.getElementById('details-hex').textContent;
   navigator.clipboard.writeText(hexValue).then(() => {
-    console.log('Hex code copied to clipboard');
+    console.log('Hex code copied to clipboard!');
   }).catch(err => {
     console.error('Failed to copy: ', err);
   });

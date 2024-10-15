@@ -9,141 +9,152 @@
 </head>
 
 <style>
-        body {
-            font-family: 'Poppins', sans-serif;
-            background-color: #1a1a1a;
-            color: #ffffff;
-            line-height: 1.6;
-            padding: 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
+    body {
+        font-family: 'Poppins', sans-serif;
+        background-color: #1a1a1a;
+        color: #ffffff;
+        line-height: 1.6;
+        padding: 2rem;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
 
-        h1 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            text-align: center;
-        }
+    h1 {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+        text-align: center;
+    }
 
-        #color-form {
-            background-color: #2a2a2a;
-            padding: 2rem;
-            border-radius: 10px;
-            margin-bottom: 2rem;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1rem;
-            align-items: center;
-        }
+    #color-form {
+        background-color: #2a2a2a;
+        padding: 2rem;
+        border-radius: 10px;
+        margin-bottom: 2rem;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        align-items: center;
+    }
 
-        #color-form label {
-            font-weight: 600;
-        }
+    #color-form label {
+        font-weight: 600;
+    }
 
-        #color-form select,
-        #color-form input[type="number"],
-        #color-form input[type="submit"] {
-            padding: 0.5rem 1rem;
-            border: none;
-            border-radius: 5px;
-            background-color: #3a3a3a;
-            color: #ffffff;
-            font-size: 1rem;
-        }
+    #color-form select,
+    #color-form input[type="number"],
+    #color-form input[type="submit"] {
+        padding: 0.5rem 1rem;
+        border: none;
+        border-radius: 5px;
+        background-color: #3a3a3a;
+        color: #ffffff;
+        font-size: 1rem;
+    }
 
-        #color-form input[type="submit"] {
-            background-color: #4CAF50;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
+    #color-form input[type="submit"] {
+        background-color: #4CAF50;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
 
-        #color-form input[type="submit"]:hover {
-            background-color: #45a049;
-        }
+    #color-form input[type="submit"]:hover {
+        background-color: #45a049;
+    }
 
-        #click-instructions {
-            text-align: center;
-            margin-bottom: 1rem;
-            font-style: italic;
-        }
+    #click-instructions {
+        text-align: center;
+        margin-bottom: 1rem;
+        font-style: italic;
+    }
 
-        #result {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 2rem;
-        }
+    #result {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 2rem;
+        align-items: flex-start;
+    }
 
-        #palettes {
-            flex: 1;
-            min-width: 300px;
-        }
+    #palettes {
+        flex: 1;
+        min-width: 300px;
+    }
 
-        .palette {
-            background-color: #2a2a2a;
-            padding: 1rem;
-            border-radius: 10px;
-            margin-bottom: 1rem;
-        }
+    .palette {
+        background-color: #2a2a2a;
+        padding: 1rem;
+        border-radius: 10px;
+        margin-bottom: 1rem;
+    }
 
-        .palette-label {
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-        }
+    .palette-label {
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+        display: block;
+    }
 
-        .palette-colors {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-        }
+    .palette-colors {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.35rem;
+        padding: 0.5rem;
+    }
 
-        .palette-color {
-            width: 10rem;
-            height: 10rem;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: transform 0.2s;
-        }
+    .palette-color {
+        width: 5em;
+        height: 5em;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: transform 0.2s, box-shadow 0.2s;
+    }
 
-        .palette-color:hover {
-            transform: scale(1.1);
-        }
+    .palette-color:hover {
+        transform: scale(1.05);
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+    }
 
-        #details {
-            flex: 0 0 300px;
-            background-color: #2a2a2a;
-            padding: 2rem;
-            border-radius: 10px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
+    .palette-color.selected {
+        transform: scale(1.1);
+        box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+    }
 
-        #details-color {
-            width: 150px;
-            height: 150px;
-            border-radius: 10px;
-            margin-bottom: 1rem;
-        }
+    #details {
+        flex: 0 0 300px;
+        background-color: #2a2a2a;
+        padding: 2rem;
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        position: sticky;
+        top: 2rem;
+    }
 
-        #details span {
-            margin-bottom: 0.5rem;
-            font-size: 1.1rem;
-        }
+    #details-color {
+        width: 150px;
+        height: 150px;
+        border-radius: 10px;
+        margin-bottom: 1rem;
+    }
 
-        #copy-button {
-            margin-top: 1rem;
-            padding: 0.5rem 1rem;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
+    #details span {
+        margin-bottom: 0.5rem;
+        font-size: 1.1rem;
+    }
 
-        #copy-button:hover {
-            background-color: #45a049;
-        }
+    #copy-button {
+        margin-top: 1rem;
+        padding: 0.5rem 1rem;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    #copy-button:hover {
+        background-color: #45a049;
+    }
 </style>
 
 <body>
@@ -200,41 +211,60 @@
             palettesElement.innerHTML = "";
             palettes.forEach((palette, paletteIndex) => {
                 const paletteElement = document.createElement("div");
+                paletteElement.classList.add("palette");
                 palettesElement.appendChild(paletteElement);
+                
                 const paletteLabelElement = document.createElement("span");
                 paletteLabelElement.innerText = `Palette ${paletteIndex + 1}:`
-                paletteLabelElement.style.lineHeight = "1";
-                paletteLabelElement.style.display = "block";
-                paletteLabelElement.style.marginBottom = ".125em";
+                paletteLabelElement.classList.add("palette-label");
                 paletteElement.appendChild(paletteLabelElement);
+                
                 const paletteColorsElement = document.createElement("div");
-                paletteColorsElement.style.display = "flex";
-                paletteColorsElement.style.flexWrap = "wrap";
-                paletteColorsElement.style.marginBottom = ".25em";
+                paletteColorsElement.classList.add("palette-colors");
                 paletteElement.appendChild(paletteColorsElement);
+                
                 for (const color of palette) {
                     const hex = getHexFromRGB(color);
                     const paletteColorElement = document.createElement("div");
                     paletteColorElement.addEventListener("click", () => {
-                        const detailsColor = document.getElementById("details-color");
-                        const detailsHex = document.getElementById("details-hex");
-                        const detailsRGB = document.getElementById("details-rgb");
-                        detailsColor.style.backgroundColor = hex;
-                        detailsHex.innerText = `${hex}`;
-                        detailsRGB.innerText = `RGB: (${color[0]}, ${color[1]}, ${color[2]})`;
-                        
-                        navigator.clipboard.writeText(hex).then(() => {
-                            console.log('Hex code copied to clipboard');
-                        }).catch(err => {
-                            console.error('Failed to copy: ', err);
-                        });
+                        updateColorDetails(hex, color);
+                        highlightSelectedColor(paletteColorElement);
                     });
                     paletteColorElement.style.backgroundColor = hex;
-                    paletteColorElement.style.width = "5em";
-                    paletteColorElement.style.height = "5em";
+                    paletteColorElement.classList.add("palette-color");
                     paletteColorsElement.appendChild(paletteColorElement);
                 }
             });
+        }
+
+        function updateColorDetails(hex, color) {
+            const detailsColor = document.getElementById("details-color");
+            const detailsHex = document.getElementById("details-hex");
+            const detailsRGB = document.getElementById("details-rgb");
+            detailsColor.style.backgroundColor = hex;
+            detailsHex.innerText = `${hex}`;
+            detailsRGB.innerText = `RGB: (${color[0]}, ${color[1]}, ${color[2]})`;
+            
+            navigator.clipboard.writeText(hex).then(() => {
+                console.log('Hex code copied to clipboard');
+                showCopiedFeedback();
+            }).catch(err => {
+                console.error('Failed to copy: ', err);
+            });
+        }
+
+        function highlightSelectedColor(element) {
+            const allColors = document.querySelectorAll('.palette-color');
+            allColors.forEach(color => color.classList.remove('selected'));
+            element.classList.add('selected');
+        }
+
+        function showCopiedFeedback() {
+            const copyButton = document.getElementById("copy-button");
+            copyButton.textContent = "Copied!";
+            setTimeout(() => {
+                copyButton.textContent = "Copy Hex";
+            }, 1500);
         }
 
         document.getElementById("color-form").addEventListener("submit", (e) => {
